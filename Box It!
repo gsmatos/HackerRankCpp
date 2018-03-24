@@ -1,0 +1,45 @@
+class Box
+{
+  long l, b, h;
+    
+    public:
+        Box();
+        Box(int length, int breadth, int height): l(length), b(breadth), h(height){};
+        Box(const Box&);
+    
+        int getLength() const {return l;};
+        int getBreadth() const {return b;};
+        int getHeight() const {return h;};
+        long CalculateVolume() {return l*b*h;};
+    
+        friend ostream& operator<<(ostream& out, const Box& B);
+        friend bool operator<(const Box& a, const Box& b);
+};
+
+ostream& operator<<(ostream& out, const Box& B)
+{
+    out<<B.l<<" "<<B.b<<" "<< B.h;
+    return out;
+}
+
+bool operator<(const Box& a, const Box& b)
+{
+    if (a.getLength()<b.getLength()) return true;
+    if (a.getBreadth()<b.getBreadth() && a.getLength()==b.getLength()) return true;
+    if (a.getHeight()<b.getHeight() && a.getLength()==b.getLength() && a.getBreadth()==b.getBreadth()) return true;
+    return false;    
+}
+
+Box::Box(const Box& toCopy)
+{
+    l = toCopy.getLength();
+    b = toCopy.getBreadth();
+    h = toCopy.getHeight(); 
+}
+
+Box::Box()
+{
+    l = 0;
+    b = 0;
+    h = 0;
+}
