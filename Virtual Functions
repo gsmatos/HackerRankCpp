@@ -1,0 +1,60 @@
+class Person
+{
+    friend class Professor;
+    friend class Student;
+    string Name;
+    int age;
+    public:
+    virtual void getdata() {;};
+    virtual void putdata() {;};
+};
+
+class Professor : public Person
+{
+    
+    static int all_id;
+    int curr_id;
+    int publications;
+    public:
+    Professor(){curr_id = all_id; ++all_id;};
+    void getdata() override;
+    void putdata() override;
+};
+
+class Student :  public Person
+{
+    
+    static int all_id;
+    int curr_id;
+    vector <float> marks = vector<float>(6);
+    float sum;
+    public:
+    Student(){curr_id = all_id; ++all_id;};
+    void getdata() override;
+    void putdata() override;
+};
+
+int Professor::all_id=1;
+int Student::all_id=1;
+
+void Professor::getdata()
+{
+    cin >> Name >> age >> publications;    
+}
+
+void Professor::putdata()
+{
+    cout << Name<<" " << age<<" " << publications <<" "<<curr_id<<endl;
+}
+
+void Student::getdata()
+{
+    cin >> Name >> age >> marks[0] >> marks[1]>> marks[2]>> marks[3]>> marks[4]>> marks[5];
+    for (auto& n : marks)
+    sum += n;
+}
+
+void Student::putdata()
+{
+    cout << Name<<" " << age<<" "<<sum<<" "<<curr_id<<" "<<endl;
+}
